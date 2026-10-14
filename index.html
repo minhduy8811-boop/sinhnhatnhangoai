@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sinh nhật gia đình</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Be+Vietnam+Pro:wght@400;600&display=swap">
+<style>
+:root{--bg:#f6f0ff;--bg2:#ffe6f0;--card:#ffffffd9;--ink:#2a1a4a;--mut:#6d5c8f;--acc:#e8458b;--acc2:#7c4dff;--gold:#f5a623;--line:#2a1a4a1f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150d2b;--bg2:#2b1240;--card:#2a1d4acc;--ink:#fff3fa;--mut:#bfaee6;--acc:#ff6fae;--acc2:#9a7bff;--gold:#ffc857;--line:#ffffff24}}
+:root[data-theme="dark"]{--bg:#150d2b;--bg2:#2b1240;--card:#2a1d4acc;--ink:#fff3fa;--mut:#bfaee6;--acc:#ff6fae;--acc2:#9a7bff;--gold:#ffc857;--line:#ffffff24}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:var(--ink);background:radial-gradient(1200px 700px at 80% -10%,var(--bg2),transparent 60%),var(--bg);line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Baloo 2','Be Vietnam Pro',system-ui,sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px 60px;position:relative;z-index:1}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:10px;padding:34px 0 10px}
+.hero h1{font-size:clamp(2.4rem,7vw,4.4rem);font-weight:800;background:linear-gradient(100deg,var(--acc),var(--gold) 55%,var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;overflow-wrap:break-word}
+.hero p{color:var(--mut);max-width:34ch;margin:14px 0 18px}
+.next{display:inline-flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 18px;backdrop-filter:blur(8px)}
+.next b{font-family:'Baloo 2',sans-serif;font-size:2rem;color:var(--acc);line-height:1}
+.cake{width:100%;max-width:360px;justify-self:center;filter:drop-shadow(0 18px 30px #e8458b40)}
+.flame{transform-origin:50% 100%;animation:fl .5s ease-in-out infinite alternate}
+.flame:nth-of-type(2){animation-delay:.15s}.flame:nth-of-type(3){animation-delay:.3s}
+@keyframes fl{from{transform:scale(1,1) rotate(-4deg)}to{transform:scale(.88,1.15) rotate(4deg)}}
+.glow{animation:gl 2s ease-in-out infinite alternate}@keyframes gl{from{opacity:.35}to{opacity:.8}}
+.cake{animation:bob 4s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-8px)}}
+/* balloons */
+.balloons{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bl{position:absolute;bottom:-120px;width:44px;height:56px;border-radius:50% 50% 48% 48%;opacity:.5;animation:rise linear infinite}
+.bl::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:50px;background:var(--mut)}
+@keyframes rise{to{transform:translateY(-120vh) translateX(30px)}}
+/* panels */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;backdrop-filter:blur(10px);margin-top:22px}
+.panel h2{font-size:1.5rem;margin-bottom:14px}
+form{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:4px}
+input[type=text],input[type=date]{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit}
+input:focus-visible,button:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.av{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px}
+.av button{font-size:1.5rem;width:46px;height:46px;border-radius:50%;border:2px solid var(--line);background:transparent;cursor:pointer;transition:transform .2s}
+.av button[aria-pressed=true]{border-color:var(--acc);transform:scale(1.15);background:#ff6fae22}
+.btn{border:0;border-radius:14px;padding:12px 20px;font:600 1rem 'Be Vietnam Pro',sans-serif;color:#fff;background:linear-gradient(100deg,var(--acc),var(--acc2));cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #e8458b55}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{box-shadow:none;border-color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{position:relative;border:1px solid var(--line);border-radius:22px;padding:18px;background:var(--card);overflow:hidden}
+.card.today{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 10px 30px #f5a62340}
+.card .e{font-size:2.6rem;line-height:1}
+.card h3{font-size:1.4rem;margin:6px 0 0}
+.card small{color:var(--mut)}
+.days{font-family:'Baloo 2',sans-serif;font-size:1.9rem;color:var(--acc);margin-top:6px}
+.bar{height:6px;border-radius:9px;background:var(--line);overflow:hidden;margin:8px 0 12px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--acc));border-radius:9px;transition:width 1s}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row .btn{padding:8px 14px;font-size:.88rem}
+.empty{text-align:center;color:var(--mut);padding:26px 10px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.linkbox{width:100%;margin-top:12px;display:none}
+/* celebrate */
+#cel{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 40%,#5b1d78ee,#150d2bf2)}
+#cel.on{display:flex;animation:fadein .5s}
+@keyframes fadein{from{opacity:0}}
+#cel .box{position:relative;z-index:2;color:#fff;max-width:640px}
+#cel .big{font-size:5rem;animation:pop 1s cubic-bezier(.2,1.6,.4,1)}
+#cel h2{font-size:clamp(2rem,7vw,3.8rem);margin:6px 0 10px;color:#ffd77a;text-shadow:0 4px 30px #ff6fae}
+#cel p{font-size:1.15rem;margin:0 0 20px}
+@keyframes pop{from{transform:scale(0) rotate(-30deg)}}
+#cv{position:fixed;inset:0;z-index:60;pointer-events:none}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:30px;opacity:0;transition:.3s;z-index:80}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:720px){.hero{grid-template-columns:1fr;text-align:center}.hero p{margin-inline:auto}.cake{max-width:240px}form{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="balloons" id="bls" aria-hidden="true"></div>
+<canvas id="cv" aria-hidden="true"></canvas>
+<div class="wrap">
+ <section class="hero">
+  <div>
+   <h1>Sinh nhật gia đình mình</h1>
+   <p>Nhập ngày sinh của từng người, trang sẽ đếm ngược và gửi lời chúc đúng ngày.</p>
+   <div class="next" id="next" aria-live="polite"></div>
+  </div>
+  <svg class="cake" viewBox="0 0 300 300" role="img" aria-label="Chiếc bánh sinh nhật có nến đang cháy">
+   <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb6d5"/><stop offset="1" stop-color="#ff6fae"/></linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0c9"/><stop offset="1" stop-color="#ffc857"/></linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b5ff"/><stop offset="1" stop-color="#8a63ff"/></linearGradient>
+    <radialGradient id="fg"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#ffe9a000"/></radialGradient>
+   </defs>
+   <ellipse cx="150" cy="276" rx="120" ry="12" fill="#00000030"/>
+   <rect x="38" y="196" width="224" height="76" rx="16" fill="url(#g3)"/>
+   <path d="M38 214q14 20 28 0t28 0 28 0 28 0 28 0 28 0 28 0 28 0v-12H38z" fill="#fff" opacity=".85"/>
+   <rect x="68" y="136" width="164" height="66" rx="14" fill="url(#g2)"/>
+   <path d="M68 152q13 18 27 0t27 0 27 0 27 0 28 0v-10H68z" fill="#fff" opacity=".85"/>
+   <rect x="100" y="84" width="100" height="58" rx="12" fill="url(#g1)"/>
+   <path d="M100 98q10 14 20 0t20 0 20 0 20 0 20 0v-8H100z" fill="#fff" opacity=".9"/>
+   <g fill="#fff"><circle cx="90" cy="236" r="4"/><circle cx="150" cy="244" r="4"/><circle cx="210" cy="236" r="4"/><circle cx="120" cy="170" r="3.5"/><circle cx="180" cy="170" r="3.5"/></g>
+   <g>
+    <rect x="124" y="52" width="7" height="34" rx="3" fill="#7c4dff"/><rect x="146" y="46" width="7" height="40" rx="3" fill="#ffc857"/><rect x="169" y="52" width="7" height="34" rx="3" fill="#7c4dff"/>
+    <circle class="glow" cx="127" cy="40" r="22" fill="url(#fg)"/><circle class="glow" cx="149" cy="34" r="22" fill="url(#fg)"/><circle class="glow" cx="172" cy="40" r="22" fill="url(#fg)"/>
+    <path class="flame" d="M127 28c-7 8-5 15 0 18 5-3 7-10 0-18z" fill="#ffb02e"/>
+    <path class="flame" d="M149 22c-7 8-5 15 0 18 5-3 7-10 0-18z" fill="#ffb02e"/>
+    <path class="flame" d="M172 28c-7 8-5 15 0 18 5-3 7-10 0-18z" fill="#ffb02e"/>
+   </g>
+  </svg>
+ </section>
+
+ <section class="panel">
+  <h2>Thêm người thân (lưu trên máy bạn)</h2>
+  <form id="f">
+   <div><label for="n">Tên</label><input id="n" type="text" maxlength="30" placeholder="Ví dụ: Mẹ, Bé Bông…" required></div>
+   <div><label for="d">Ngày tháng năm sinh</label><input id="d" type="date" required></div>
+   <button class="btn" type="submit">Thêm</button>
+   <div class="av" id="av" role="group" aria-label="Chọn hình đại diện"></div>
+  </form>
+ </section>
+
+ <section class="panel">
+  <h2>Cả nhà mình</h2>
+  <div class="grid" id="list"></div>
+  <div class="tools">
+   <button class="btn" id="share">Gửi cho mọi người</button>
+   <button class="btn ghost" id="copy">Sao chép liên kết</button>
+  </div>
+  <input class="linkbox" id="lb" type="text" readonly aria-label="Liên kết chia sẻ">
+ </section>
+</div>
+
+<div id="cel" role="dialog" aria-modal="true" aria-label="Chúc mừng sinh nhật">
+ <div class="box">
+  <div class="big" id="cb">🎂</div>
+  <h2 id="ct"></h2>
+  <p id="cp"></p>
+  <div class="row" style="justify-content:center">
+   <button class="btn" id="cs">Gửi lời chúc</button>
+   <button class="btn ghost" id="cx" style="color:#fff;border-color:#ffffff66">Đóng</button>
+  </div>
+ </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+/* ====== DANH SÁCH CẢ NHÀ: sửa tên và ngày sinh ở đây (định dạng năm-tháng-ngày) ====== */
+var FAMILY=[
+ {n:'Nguyễn Thị Mỹ Tang',dob:'1985-03-01',e:'👩'},
+ {n:'Huỳnh Nguyễn Nguyên Vũ',dob:'1982-01-10',e:'👨'},
+ {n:'Bà ngoại',dob:'1951-10-10',e:'👵'},
+ {n:'Huỳnh Vân Anh',dob:'2009-06-03',e:'👧'},
+ {n:'Huỳnh Long Bảo',dob:'2012-01-04',e:'👦'},
+ {n:'Huỳnh Diễm Ngọc',dob:'2014-01-16',e:'👧'},
+ {n:'Huỳnh Gia Hân',dob:'2021-10-23',e:'👧'},
+ {n:'Huỳnh Minh Khuê',dob:'2023-06-17',e:'👶'}
+];
+/* ================================================================================== */
+var KEY='fam-bday-v1',EM=['👨','👩','👦','👧','👴','👵','👶','🐶'],em=EM[0],people=[],shown={};
+var $=function(i){return document.getElementById(i)};
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function enc(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
+function dec(s){return JSON.parse(decodeURIComponent(escape(atob(s))))}
+function load(){
+ try{var m=(location.hash||'').match(/d=([^&]+)/);if(m){var a=dec(decodeURIComponent(m[1]));if(Array.isArray(a)){people=a;save();return}}}catch(e){}
+ try{var s=localStorage.getItem(KEY);if(s)people=JSON.parse(s)||[]}catch(e){}
+}
+function all(){return FAMILY.concat(people.filter(function(p){return !FAMILY.some(function(f){return f.n===p.n&&f.dob===p.dob})}))}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(people))}catch(e){}}
+function t0(){var n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())}
+function mk(y,m,d){var x=new Date(y,m-1,d);if(m==2&&d==29&&x.getMonth()!=1)x=new Date(y,1,28);return x}
+function info(p){
+ var a=p.dob.split('-').map(Number),t=t0(),n=mk(t.getFullYear(),a[1],a[2]);
+ if(n<t)n=mk(t.getFullYear()+1,a[1],a[2]);
+ return{days:Math.round((n-t)/864e5),age:n.getFullYear()-a[0],d:a[2],m:a[1],y:a[0]};
+}
+function fmt(i){return ('0'+i.d).slice(-2)+'/'+('0'+i.m).slice(-2)+'/'+i.y}
+function toast(s){var t=$('toast');t.textContent=s;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200)}
+var wishes=['Con chúc mẹ/ba/hai tuổi mới thật nhiều sức khỏe, niềm vui và những điều bất ngờ trong cuộc sống nhé!,bình an,hạnh phúc,mong mọi điều ước đều sẽ trở thành hiện thực'];
+function render(){
+ var L=$('list');
+ if(!all().length){L.innerHTML='<div class="empty">Chưa có ai. Hãy thêm người đầu tiên ở phía trên nhé.</div>';$('next').innerHTML='<span>Thêm một người để bắt đầu đếm ngược</span>';return}
+ var arr=all().map(function(p,i){var f=info(p);return{p:p,i:i,f:f}}).sort(function(a,b){return a.f.days-b.f.days});
+ L.innerHTML=arr.map(function(o){
+  var f=o.f,td=f.days===0;
+  return '<article class="card'+(td?' today':'')+'"><div class="e">'+esc(o.p.e)+'</div><h3>'+esc(o.p.n)+'</h3><small>Sinh ngày '+fmt(f)+'</small>'
+  +'<div class="days">'+(td?'Hôm nay! 🎉':'Còn '+f.days+' ngày')+'</div><small>Sắp tròn '+f.age+' tuổi</small>'
+  +'<div class="bar"><i style="width:'+Math.round((365-Math.min(f.days,365))/365*100)+'%"></i></div>'
+  +'<div class="row"><button class="btn" data-w="'+o.i+'">Chúc mừng</button>'+(o.i>=FAMILY.length?'<button class="btn ghost" data-x="'+o.i+'" aria-label="Xóa '+esc(o.p.n)+'">Xóa</button>':'')+'</div></article>';
+ }).join('');
+ var n=arr[0];
+ $('next').innerHTML=n.f.days===0?'<b>🎂</b><span>Hôm nay là sinh nhật của <strong>'+esc(n.p.n)+'</strong>!</span>':'<b>'+n.f.days+'</b><span>ngày nữa là sinh nhật<br><strong>'+esc(n.p.n)+'</strong></span>';
+}
+/* confetti */
+var cv=$('cv'),cx=cv.getContext('2d'),ps=[],raf=0,cols=['#ff6fae','#ffc857','#9a7bff','#5ee0c0','#fff'];
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener('resize',size);
+function burst(x,y,n){
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+ for(var i=0;i<n;i++){var a=Math.random()*Math.PI*2,v=4+Math.random()*9;ps.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-6,w:6+Math.random()*7,h:4+Math.random()*5,r:Math.random()*6,vr:Math.random()*.4-.2,c:cols[i%cols.length],l:120+Math.random()*80})}
+ if(!raf)raf=requestAnimationFrame(tick)
+}
+function tick(){
+ cx.clearRect(0,0,cv.width,cv.height);
+ ps=ps.filter(function(p){return p.l>0&&p.y<cv.height+20});
+ ps.forEach(function(p){p.vy+=.25;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.globalAlpha=Math.min(1,p.l/40);cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});
+ raf=ps.length?requestAnimationFrame(tick):0;
+}
+var party;
+function celebrate(p){
+ var f=info(p),td=f.days===0,age=td?f.age:f.age;
+ $('cb').textContent=p.e==='🐶'||!p.e?'🎂':p.e;
+ $('ct').textContent='Chúc mừng sinh nhật, '+p.n+'!';
+ var w=wishes[Math.floor(Math.random()*wishes.length)];
+ $('cp').textContent='Tròn '+age+' tuổi rồi! '+w;
+ $('cel').classList.add('on');$('cel').dataset.msg='🎂 Chúc mừng sinh nhật '+p.n+'! '+w;
+ burst(innerWidth/2,innerHeight/2,160);clearInterval(party);
+ var k=0;party=setInterval(function(){burst(Math.random()*innerWidth,innerHeight*.3,50);if(++k>5)clearInterval(party)},700);
+}
+function closeCel(){$('cel').classList.remove('on');clearInterval(party)}
+$('cx').onclick=closeCel;
+$('cs').onclick=function(){
+ var m=$('cel').dataset.msg||'';
+ if(navigator.share){navigator.share({text:m}).catch(function(){})}
+ else{try{navigator.clipboard.writeText(m);toast('Đã sao chép lời chúc')}catch(e){toast('Hãy chọn và sao chép lời chúc')}}
+};
+/* ui */
+$('av').innerHTML=EM.map(function(e,i){return '<button type="button" aria-label="Hình '+e+'" aria-pressed="'+(i===0)+'">'+e+'</button>'}).join('');
+$('av').onclick=function(ev){var b=ev.target.closest('button');if(!b)return;em=b.textContent;[].forEach.call($('av').children,function(c){c.setAttribute('aria-pressed',c===b)})};
+$('f').onsubmit=function(ev){
+ ev.preventDefault();var n=$('n').value.trim(),d=$('d').value;if(!n||!d)return;
+ people.push({n:n,dob:d,e:em});save();$('f').reset();render();toast('Đã thêm '+n);burst(innerWidth/2,200,60);
+ if(info(people[people.length-1]).days===0)celebrate(people[people.length-1]);
+};
+$('list').onclick=function(ev){
+ var w=ev.target.closest('[data-w]'),x=ev.target.closest('[data-x]');
+ if(w)celebrate(all()[+w.dataset.w]);
+ if(x){var q=all()[+x.dataset.x];var i=people.indexOf(q);if(i>=0&&confirm('Xóa '+q.n+' khỏi danh sách?')){people.splice(i,1);save();render()}}
+};
+function link(){var b=location.href.split('#')[0];return people.length?b+'#d='+encodeURIComponent(enc(people)):b}
+function showLink(){var b=$('lb');b.style.display='block';b.value=link();b.select()}
+$('copy').onclick=function(){
+ var l=link();try{navigator.clipboard.writeText(l).then(function(){toast('Đã sao chép liên kết')},showLink)}catch(e){showLink()}showLink();
+};
+$('share').onclick=function(){
+ if(navigator.share){navigator.share({title:'Sinh nhật gia đình',text:'Lịch sinh nhật cả nhà mình 🎂',url:link()}).catch(showLink)}else showLink();
+};
+/* balloons */
+(function(){var c=['#ff6fae','#ffc857','#9a7bff','#5ee0c0'],h='';for(var i=0;i<9;i++)h+='<i class="bl" style="left:'+(i*11+Math.random()*6)+'%;background:'+c[i%4]+';animation-duration:'+(16+Math.random()*14)+'s;animation-delay:'+(-Math.random()*20)+'s"></i>';$('bls').innerHTML=h})();
+load();render();
+var tdp=all().filter(function(p){return info(p).days===0});
+if(tdp.length)setTimeout(function(){celebrate(tdp[0])},900);
+})();
+</script>
+</body>
+</html>
