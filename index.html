@@ -179,7 +179,12 @@ function info(p){
 }
 function fmt(i){return ('0'+i.d).slice(-2)+'/'+('0'+i.m).slice(-2)+'/'+i.y}
 function toast(s){var t=$('toast');t.textContent=s;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200)}
-var wishes=['Con chúc mẹ/ba/hai tuổi mới thật nhiều sức khỏe, niềm vui và những điều bất ngờ trong cuộc sống nhé!,bình an,hạnh phúc,mong mọi điều ước đều sẽ trở thành hiện thực'];
+var wishes=[
+ 'Chúc bạn tuổi mới thật nhiều sức khỏe, bình an và luôn được bao quanh bởi những người thương yêu nhé!',
+ 'Chúc một năm mới tràn đầy niềm vui, mọi điều ước đều thành hiện thực và nụ cười luôn nở trên môi!',
+ 'Cả nhà luôn yêu thương và mong bạn mỗi ngày đều hạnh phúc, khỏe mạnh và thật nhiều may mắn!',
+ 'Sinh nhật vui vẻ nhé! Chúc tuổi mới có thêm nhiều bình yên, nhiều tiếng cười và những điều bất ngờ thật đẹp!'
+];
 function render(){
  var L=$('list');
  if(!all().length){L.innerHTML='<div class="empty">Chưa có ai. Hãy thêm người đầu tiên ở phía trên nhé.</div>';$('next').innerHTML='<span>Thêm một người để bắt đầu đếm ngược</span>';return}
